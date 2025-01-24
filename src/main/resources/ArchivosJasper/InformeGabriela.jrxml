@@ -1,0 +1,165 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Blank_Letter" language="java" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="41256f51-cdb8-4cf1-bac8-d591dbeef38b">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="World Data Adapter"/>
+	<parameter name="Continente" class="java.lang.String"/>
+	<parameter name="País" class="java.lang.String"/>
+	<parameter name="Idioma" class="java.lang.String"/>
+	<query language="sql"><![CDATA[SELECT 
+    City.Name AS Ciudad,
+    Country.Name AS País,
+    City.Population AS Población,
+    CountryLanguage.Language AS Idioma,
+     City.District AS Distrito,
+    Country.Continent AS Continente
+    FROM 
+    City
+JOIN 
+    Country ON City.CountryCode = Country.Code
+JOIN 
+    CountryLanguage ON Country.Code = CountryLanguage.CountryCode
+ WHERE 
+    CountryLanguage.IsOfficial = 'T'
+    AND (Country.Continent = $P{Continente} OR $P{Continente} IS NULL)
+    AND (CountryLanguage.Language = $P{Idioma} OR $P{Idioma} IS NULL)
+    AND (Country.Name = $P{País} OR $P{País} IS NULL)
+ ORDER BY Country.Continent, CountryLanguage.Language, Country.Name, City.Name
+]]></query>
+	<field name="Ciudad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="Ciudad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="City"/>
+	</field>
+	<field name="País" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Name"/>
+		<property name="com.jaspersoft.studio.field.label" value="País"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Country"/>
+	</field>
+	<field name="Población" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Population"/>
+		<property name="com.jaspersoft.studio.field.label" value="Población"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="City"/>
+	</field>
+	<field name="Idioma" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Language"/>
+		<property name="com.jaspersoft.studio.field.label" value="Idioma"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="CountryLanguage"/>
+	</field>
+	<field name="Distrito" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="District"/>
+		<property name="com.jaspersoft.studio.field.label" value="Distrito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="City"/>
+	</field>
+	<field name="Continente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Continent"/>
+		<property name="com.jaspersoft.studio.field.label" value="Continente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Country"/>
+	</field>
+	<group name="GroupContinente">
+		<expression><![CDATA[$F{Continente}]]></expression>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="78" splitType="Stretch">
+		<element kind="frame" uuid="b8f5dfb4-7c57-4438-9db8-e872906d4253" mode="Opaque" x="0" y="0" width="572" height="78" forecolor="#1A1817" backcolor="#164D91">
+			<element kind="image" uuid="f6d060a0-9458-4244-99da-56e69ec521fb" x="0" y="0" width="572" height="78">
+				<expression><![CDATA["istockphoto-173242811-612x612.png"]]></expression>
+			</element>
+			<element kind="textField" uuid="f6778658-0c28-4f45-8be5-e502bb873cff" x="140" y="18" width="430" height="60" forecolor="#FFFFFF" fontName="SansSerif" fontSize="24.0" bold="true" italic="false" underline="false">
+				<expression><![CDATA["WORLD DATA BASE: Cities"]]></expression>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="31" splitType="Stretch">
+		<element kind="textField" uuid="1393b79a-da21-487f-b7d7-3a4d30946c25" x="30" y="10" width="92" height="20" fontSize="12.0" blankWhenNull="true" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$P{Continente}]]></expression>
+		</element>
+		<element kind="textField" uuid="c1dc5b81-fc83-48ea-8cde-b029df2697bc" x="200" y="10" width="52" height="20" fontSize="12.0" blankWhenNull="true" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$P{País}]]></expression>
+		</element>
+		<element kind="textField" uuid="c7a34973-3178-4309-bab3-22de57a7d711" x="357" y="10" width="81" height="20" fontSize="12.0" blankWhenNull="true" bold="true" hTextAlign="Right">
+			<expression><![CDATA[$P{Idioma}]]></expression>
+		</element>
+		<element kind="textField" uuid="6d8e9311-886c-4b77-8eee-10833f95aecd" x="4" y="10" width="100" height="21" fontSize="12.0" bold="true">
+			<expression><![CDATA["Continent:"]]></expression>
+		</element>
+		<element kind="textField" uuid="4768c831-5224-4298-9d8e-ec52aef317a1" x="156" y="10" width="100" height="21" fontSize="12.0" bold="true">
+			<expression><![CDATA["Country:"]]></expression>
+		</element>
+		<element kind="textField" uuid="58cff710-d94b-43d9-a049-5b2a3a91868f" x="320" y="10" width="100" height="21" fontSize="12.0" bold="true">
+			<expression><![CDATA["Language:"]]></expression>
+		</element>
+		<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+	</pageHeader>
+	<columnHeader height="30" splitType="Stretch">
+		<element kind="frame" uuid="bb11e7bd-a7b5-48b9-a1f4-202663b6be80" mode="Opaque" x="0" y="0" width="572" height="30" backcolor="#D6AF8D">
+			<element kind="staticText" uuid="8a63d38c-ca6d-4694-9ba3-e47d3193faf2" x="20" y="4" width="72" height="20" fontSize="14.0" bold="true">
+				<text><![CDATA[City]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c68b92ba-32ed-49ba-82e5-fdf599793c21"/>
+			</element>
+			<element kind="staticText" uuid="f05bf38a-c40d-458c-9fb0-0c7becc60861" x="203" y="4" width="57" height="21" fontSize="14.0" bold="true">
+				<text><![CDATA[Country]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="adc56502-a5c6-4b38-aa03-c74a9235a4b8"/>
+			</element>
+			<element kind="staticText" uuid="64d8afca-405e-44b7-84f6-c531b65714cb" x="279" y="4" width="85" height="24" fontSize="14.0" bold="true">
+				<text><![CDATA[Population]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b9aedf0f-85e7-4695-bbf6-3e0083f39d7e"/>
+			</element>
+			<element kind="staticText" uuid="87954bd0-8bf5-493f-baf0-5060374d045a" x="374" y="5" width="68" height="20" fontSize="14.0" bold="true">
+				<text><![CDATA[Language]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="85e68689-c461-44c0-b61a-0cdacd003549"/>
+			</element>
+			<element kind="staticText" uuid="d64c6d6e-c227-486a-8963-5a65a176b1d2" x="467" y="4" width="80" height="20" fontSize="14.0" bold="true">
+				<text><![CDATA[Continent]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b2a0833-996e-4937-a1d9-00c48106c767"/>
+			</element>
+			<element kind="staticText" uuid="f1b45f34-7c8a-4ebd-b85f-25d73d17a512" x="115" y="4" width="76" height="22" fontSize="14.0" bold="true">
+				<text><![CDATA[District]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="717e1549-d24b-4428-93e0-ce88d967e18e"/>
+			</element>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<element kind="frame" uuid="385f9434-dc1a-4c49-a5a0-2b73d9515410" mode="Opaque" x="0" y="0" width="572" height="22" backcolor="#AFBDDE">
+				<element kind="textField" uuid="5c242417-26cd-44df-974e-df8274c31ac4" x="20" y="6" width="97" height="19">
+					<expression><![CDATA[$F{Ciudad}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c68b92ba-32ed-49ba-82e5-fdf599793c21"/>
+				</element>
+				<element kind="textField" uuid="e87b59fa-1b6c-4c2c-83d1-4945c43b0310" x="204" y="4" width="61" height="19">
+					<expression><![CDATA[$F{País}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="adc56502-a5c6-4b38-aa03-c74a9235a4b8"/>
+				</element>
+				<element kind="textField" uuid="e3a8f360-65c2-4e94-b5c2-07dd776b32fa" x="285" y="4" width="80" height="19">
+					<expression><![CDATA[$F{Población}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b9aedf0f-85e7-4695-bbf6-3e0083f39d7e"/>
+				</element>
+				<element kind="textField" uuid="6865d452-98e0-4a34-a4dc-cc7eead27bcf" x="375" y="4" width="80" height="19">
+					<expression><![CDATA[$F{Idioma}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="85e68689-c461-44c0-b61a-0cdacd003549"/>
+				</element>
+				<element kind="textField" uuid="fa5476b0-e4bc-4ab7-93e0-7c3a3815aae4" x="469" y="4" width="80" height="19">
+					<expression><![CDATA[$F{Continente}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0b2a0833-996e-4937-a1d9-00c48106c767"/>
+				</element>
+				<element kind="textField" uuid="528a77d3-726f-4e97-bdad-d61141b1a71d" x="115" y="6" width="79" height="19">
+					<expression><![CDATA[$F{Distrito}]]></expression>
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="717e1549-d24b-4428-93e0-ce88d967e18e"/>
+				</element>
+			</element>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+		</band>
+	</detail>
+	<columnFooter height="5" splitType="Stretch"/>
+	<pageFooter height="21" splitType="Stretch">
+		<element kind="frame" uuid="f5f314a6-cd11-4d85-b549-b3a75f21b78e" mode="Opaque" x="0" y="0" width="572" height="21" forecolor="#1A1817" backcolor="#E8AA68">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<element kind="textField" uuid="5deea3ef-7913-435e-8386-d01494815bda" x="6" y="3" width="146" height="17">
+				<expression><![CDATA["Page: "+$V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="ae5bc12f-23b9-49c5-9328-4b9e6b26c3be" x="467" y="3" width="103" height="17" evaluationTime="Report">
+				<expression><![CDATA["Total pages: "+$V{PAGE_NUMBER}]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary height="65" splitType="Stretch"/>
+</jasperReport>
